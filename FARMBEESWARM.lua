@@ -4802,22 +4802,6 @@ funny:Element("Button", "all can respawn", nil, function()
 	local IDBody = game:GetService("ReplicatedStorage").Events.IDBody
 	game.ReplicatedStorage.Events.IDBody:FireServer("id", {Identified = workspace.Status.CanRespawn})
 end)
-funny:Element("Button", "crash server", nil, function()
-	game.ReplicatedStorage.Events.IDBody:FireServer("id", {Identified = workspace.Status.CanRespawn})
-	wait(.1)
-	 for i,v in pairs(game.ReplicatedStorage.Weapons:GetChildren()) do
-		 wait(.2)
-		 if v:FindFirstChild("Auto") then
-			 game.ReplicatedStorage.Events.IDBody:FireServer("id", {Identified = v.Auto})
-		 end
-		 if v:FindFirstChild("FireRate") then
-			 game.ReplicatedStorage.Events.IDBody:FireServer("id", {Identified = v.FireRate})
-		 end
-		 if v:FindFirstChild("Recoil") then
-			 game.ReplicatedStorage.Events.IDBody:FireServer("id", {Identified = v.Recoil.AngleX})
-		 end
-	 end
-	end)
 funny:Element("Button", "play all sounds", nil, function()
 	if game.SoundService.RespectFilteringEnabled == false then
 		for i,v in pairs(game.Workspace:GetDescendants()) do
