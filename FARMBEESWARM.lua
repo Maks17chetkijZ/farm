@@ -1,8 +1,4 @@
 ---remove ur parents
-while true do 
- wait(60)
-    workspace.Map.Radar:Destroy()
-end
 local senv = getsenv(game.Players.LocalPlayer.PlayerGui.Client)senv.splatterBlood = function() end 
 getgenv().values = {}
 local library = {}
